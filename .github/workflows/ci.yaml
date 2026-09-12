@@ -62,13 +62,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
+      - name: Set up test environment
+        run: .github/tests/setup/${{ matrix.module }}.sh
+
       - name: Create external integration network
         run: |
           docker network inspect zammad_n8n_integration >/dev/null 2>&1 \
             || docker network create zammad_n8n_integration
-
-      - name: Set up test environment
-        run: .github/tests/setup/${{ matrix.module }}.sh
 
       - name: Run tests
         run: .github/tests/${{ matrix.module }}.sh
@@ -77,4 +77,5 @@ jobs:
         if: always()
         run: |
           docker network rm zammad_n8n_integration >/dev/null 2>&1 || true
+
 
