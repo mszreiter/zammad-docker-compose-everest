@@ -6,5 +6,9 @@
 check_stack_start
 
 print_heading "check for presence of external network"
-docker inspect zammad-docker-compose-zammad-elasticsearch-1 | grep zammad-ci-external-network
+
+CONTAINER_ID="$(docker compose ps -q zammad-elasticsearch)"
+
+docker inspect "$CONTAINER_ID" | grep zammad-ci-external-network
+
 print_heading "Success - external network is present"
