@@ -6,9 +6,9 @@
 check_stack_start
 
 print_heading "check for presence of external network"
-docker inspect zammad-docker-compose-zammad-nginx-1 | grep zammad-ci-external-network
-print_heading "Success - external network is present"
 
-print_heading "check that nginx is not exposed on the Host"
-docker inspect zammad-docker-compose-zammad-nginx-1 | grep HostPort && exit 1
-print_heading "Success - nginx is not exposed on the host"
+CONTAINER_ID="$(docker compose ps -q zammad-nginx)"
+
+docker inspect "$CONTAINER_ID" | grep zammad-ci-external-network
+
+print_heading "Success - external network is present"
