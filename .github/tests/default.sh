@@ -9,7 +9,7 @@ check_stack_start
 if [ -z "$DISABLE_EXTERNAL_TESTS" ]
 then
   print_heading "Check external connectivity on exposed port…"
-  curl http://localhost:8080 | grep "Zammad"
+  curl http://localhost:8083 | grep "Zammad"
   print_heading "Zammad is available via external port :)"
 fi
 
